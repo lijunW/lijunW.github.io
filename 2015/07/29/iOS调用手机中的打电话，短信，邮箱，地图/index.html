@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>iOS调用手机中的打电话，短信，邮箱，地图 | lijunWang&#39;Blog</title>
+  <meta name="author" content="lijunWwang">
+  
+  <meta name="description" content="Introduce tag plugins in freemind.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="iOS调用手机中的打电话，短信，邮箱，地图"/>
+  <meta property="og:site_name" content="lijunWang&#39;Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">lijunWang&#39;Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> iOS调用手机中的打电话，短信，邮箱，地图</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> Introduce tag plugins in freemind.
+		 </div> <!-- alert -->
+	  		
+
+	  <p>1、调用邮件客户端(Apple Mail)</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"mailto:wanglijun311@gmail.com"</span>]];</span><br></pre></td></tr></table></figure>
+<p>2、调用电话(Phone Number)</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="type">UIApplication</span> sharedApplication] openURL:[<span class="type">NSURL</span> <span class="type">URLWithString</span>:@<span class="string">"tel:8008808888"</span>]];</span><br></pre></td></tr></table></figure>
+<p>iOS应用内拨打电话结束后返回应用<br>一般在应用中拨打电话的方式是：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="type">UIApplication</span> sharedApplication] openURL:[<span class="type">NSURL</span> <span class="type">URLWithString</span>:@<span class="string">"tel:123456789"</span>]];</span><br></pre></td></tr></table></figure>
+<p>使用这种方式拨打电话时，当用户结束通话后，iphone界面会停留在电话界面。<br>用如下方式，可以使得用户结束通话后自动返回到应用：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">UIWebView</span>*callWebview =[[<span class="type">UIWebView</span> alloc] <span class="keyword">init</span>];</span><br><span class="line"><span class="type">NSURL</span> *telURL =[<span class="type">NSURL</span> <span class="type">URLWithString</span>:@<span class="string">"tel:10086"</span>];<span class="comment">// 貌似tel:// 或者 tel: 都行</span></span><br><span class="line">[callWebview loadRequest:[<span class="type">NSURLRequest</span> requestWithURL:telURL]];</span><br><span class="line"></span><br><span class="line"><span class="comment">//记得添加到view上</span></span><br><span class="line">[<span class="keyword">self</span>.view addSubview:callWebview];</span><br></pre></td></tr></table></figure>
+
+<p>还有一种私有方法：（可能不能通过审核）</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"telprompt://10086"</span>]];</span><br></pre></td></tr></table></figure>
+<p>3、调用短信(SMS)</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"sms://18055352658"</span>]];</span><br></pre></td></tr></table></figure>
+<p>4、调用自带 浏览器 safari</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://lijunwang.wang"</span>]];</span><br></pre></td></tr></table></figure>
+<p>调用phone可以传递号码，调用SMS 只能设定号码，不能初始化SMS内容。<br>若需要传递内容可以做如下操作：<br>加入：<code>MessageUI.framework</code></p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;MessageUI/MFMessageComposeViewController.h&gt;</span></span></span><br><span class="line">实现代理：MFMessageComposeViewControllerDelegate</span><br><span class="line">调用sendSMS函数</span><br><span class="line"><span class="comment">//内容，收件人列表</span></span><br><span class="line">- (<span class="keyword">void</span>)sendSMS:(<span class="built_in">NSString</span> *)bodyOfMessage recipientList:(<span class="built_in">NSArray</span> *)recipients</span><br><span class="line">&#123;</span><br><span class="line">MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];</span><br><span class="line"><span class="keyword">if</span>([MFMessageComposeViewController canSendText])</span><br><span class="line">&#123;</span><br><span class="line">controller.body = bodyOfMessage;</span><br><span class="line">controller.recipients = recipients;</span><br><span class="line">controller.messageComposeDelegate = <span class="keyword">self</span>;</span><br><span class="line">[<span class="keyword">self</span> presentModalViewController:controller animated:<span class="literal">YES</span>];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 处理发送完的响应结果</span></span><br><span class="line">- (<span class="keyword">void</span>)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> dismissModalViewControllerAnimated:<span class="literal">YES</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (result == MessageComposeResultCancelled)</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Message cancelled"</span>)</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (result == MessageComposeResultSent)</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Message sent"</span>)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"Message failed"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认发送短信的界面为英文的，解决办法为：<br>在<code>.xib</code> 中的Localization添加一組chinese就ok了</p>
+<p>5、调用谷歌地图(Google Maps)<br>URL模式：<a href="http://maps.google.com/maps?q=" target="_blank" rel="noopener">http://maps.google.com/maps?q=</a><strong>${QUERY_STRING}</strong><br>代码示例：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span>* searchQuery =<span class="string">@"1 Infinite Loop, Cupertino, CA 95014"</span>;</span><br><span class="line">searchQuery =[addressText stringByAddingPercentEscapesUsingEncoding: <span class="built_in">NSUTF8StringEncoding</span>];</span><br><span class="line"><span class="built_in">NSString</span>* urlString =[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"http://maps.google.com/maps?q=%@"</span>, searchQuery];</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:[<span class="built_in">NSURL</span> URLWithString:urlText]];</span><br></pre></td></tr></table></figure>
+<p>6、调用应用商店(AppStore)<br>URL模式：<a href="http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=291586600&amp;mt=8" target="_blank" rel="noopener">http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=291586600&amp;mt=8</a><br>代码示例：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSURL</span>*appStoreUrl =[<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=291586600&amp;amp;amp;mt=8"</span>];</span><br><span class="line">[[<span class="built_in">UIApplication</span> sharedApplication] openURL:appStoreUrl];</span><br></pre></td></tr></table></figure>
+<p>注意：对于iOS10及以上 如果调用 [UIApplication sharedApplication] openURL:时响应很慢，可以调用新的API</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)openURL:(<span class="built_in">NSURL</span>*)url options:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)options completionHandler:(<span class="keyword">void</span> (^ __<span class="keyword">nullable</span>)(<span class="built_in">BOOL</span> success))completion <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">10</span>_0) <span class="built_in">NS_EXTENSION_UNAVAILABLE_IOS</span>(<span class="string">""</span>);</span><br></pre></td></tr></table></figure>
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/2015/07/29/iOS%E8%B0%83%E7%94%A8%E6%89%8B%E6%9C%BA%E4%B8%AD%E7%9A%84%E6%89%93%E7%94%B5%E8%AF%9D%EF%BC%8C%E7%9F%AD%E4%BF%A1%EF%BC%8C%E9%82%AE%E7%AE%B1%EF%BC%8C%E5%9C%B0%E5%9B%BE/" class="leancloud-visitors view" data-flag-title="iOS调用手机中的打电话，短信，邮箱，地图">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2016/03/09/iOS ReactiveCocoa常用API/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a type="button" class="btn btn-default disabled">下一页<i class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"xxx","appKey":"xxx","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-07-29 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Docs/">Docs<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/plugins/">plugins<span>8</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2020 lijunWwang's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

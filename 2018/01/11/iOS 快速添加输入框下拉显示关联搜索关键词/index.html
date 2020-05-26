@@ -1,0 +1,327 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>快速添加输入框下拉显示关联搜索关键词 | lijunWang&#39;Blog</title>
+  <meta name="author" content="lijunWwang">
+  
+  <meta name="description" content="Introduce tag plugins in freemind.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="快速添加输入框下拉显示关联搜索关键词"/>
+  <meta property="og:site_name" content="lijunWang&#39;Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">lijunWang&#39;Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> 快速添加输入框下拉显示关联搜索关键词</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> Introduce tag plugins in freemind.
+		 </div> <!-- alert -->
+	  		
+
+	  <p><code>快速添加输入框下拉显示关联搜索关键词</code></p>
+<h2 id="GIF-animation"><a href="#GIF-animation" class="headerlink" title="GIF animation"></a>GIF animation</h2><p><a href="http://ovn0zb2g7.bkt.clouddn.com/WLJSearchTableViewVideo.mov" target="_blank" rel="noopener"><img src="http://ovn0zb2g7.bkt.clouddn.com/WLJSearchTableView1.gif" alt="WLJSearchTableView"></a></p>
+<h2 id="Video"><a href="#Video" class="headerlink" title="Video"></a>Video</h2><p><a href="http://ovn0zb2g7.bkt.clouddn.com/WLJSearchTableViewVideo.mov" target="_blank"><img src="http://ovn0zb2g7.bkt.clouddn.com/Simulator%20Screen%20Shot%20-%20iPhone%206s%20Plus%20-%202018-01-11%20at%2015.57.49.png"
+alt="WLJSearchTableView Demo Video" width="320" height="480" border="10" /></a></p>
+<h1 id="GetStart"><a href="#GetStart" class="headerlink" title="GetStart"></a>GetStart</h1><h4 id="1-导入WLJSearchTableview文件夹进工程"><a href="#1-导入WLJSearchTableview文件夹进工程" class="headerlink" title="1.导入WLJSearchTableview文件夹进工程"></a>1.导入WLJSearchTableview文件夹进工程</h4><h4 id="2-导入-import-“UITextField-WLJSearchTableview-h”"><a href="#2-导入-import-“UITextField-WLJSearchTableview-h”" class="headerlink" title="2.导入#import “UITextField+WLJSearchTableview.h”"></a>2.导入#import “UITextField+WLJSearchTableview.h”</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">__<span class="keyword">weak</span> <span class="keyword">typeof</span>(<span class="keyword">self</span>) weakSelf = <span class="keyword">self</span>;</span><br><span class="line">WLJSearchTableviewConfig * searchTableviewConfig  = [[WLJSearchTableviewConfig alloc]init];</span><br><span class="line"><span class="comment">//searchTableviewConfig.searchTime = SearchTimeWhileDidEndEditing;//输入结束时开始搜索</span></span><br><span class="line">searchTableviewConfig.searchTime = SearchTimeWhileDidChange;<span class="comment">//输入变化时开始搜索</span></span><br><span class="line">searchTableviewConfig.searchTableViewCellEstablishHeight = <span class="number">30</span>;<span class="comment">//行高</span></span><br><span class="line">searchTableviewConfig.maxShowNum = <span class="number">3</span>;<span class="comment">//最大显示行数</span></span><br><span class="line"><span class="comment">//调用搜索接口，并返回搜索结果</span></span><br><span class="line">searchTableviewConfig.searchKeywordsFunc = ^(<span class="built_in">NSString</span> *keyWords, SearchCompleteblock searchCompleteblock) &#123;</span><br><span class="line">  [weakSelf searchWithKeyWords:keyWords complete:searchCompleteblock];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//设置cell显示</span></span><br><span class="line">searchTableviewConfig.cellForRowAtIndexPath = ^(<span class="built_in">UITableViewCell</span> *cell, <span class="built_in">NSIndexPath</span> *indexPath,<span class="keyword">id</span> data) &#123;</span><br><span class="line">  <span class="built_in">NSDictionary</span> * currentData = (<span class="built_in">NSDictionary</span> *) data;</span><br><span class="line">  cell.textLabel.text = currentData[<span class="string">@"name"</span>];</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//点击了搜索结果</span></span><br><span class="line">searchTableviewConfig.didSeletedRowAtIndexPath = ^(<span class="built_in">NSIndexPath</span> *indexPath, <span class="keyword">id</span> data) &#123;</span><br><span class="line">  <span class="built_in">NSDictionary</span> * currentData = (<span class="built_in">NSDictionary</span> *) data;</span><br><span class="line">  <span class="comment">//do your code ... eg.:</span></span><br><span class="line">  <span class="built_in">UIAlertController</span> * alert =  [<span class="built_in">UIAlertController</span> alertControllerWithTitle:<span class="literal">nil</span> message:[<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"点击 了%@"</span>,currentData[<span class="string">@"name"</span>]] preferredStyle:<span class="built_in">UIAlertControllerStyleAlert</span>];</span><br><span class="line">  [alert addAction:[<span class="built_in">UIAlertAction</span> actionWithTitle:<span class="string">@"返回"</span> style:<span class="built_in">UIAlertActionStyleCancel</span> handler:<span class="literal">nil</span>]];</span><br><span class="line">  [weakSelf presentViewController:alert animated:<span class="literal">YES</span> completion:<span class="literal">nil</span>];</span><br><span class="line">&#125;;</span><br><span class="line">[textField wlj_enableSeatchTableViewWithConfig:searchTableviewConfig];</span><br></pre></td></tr></table></figure>
+<p>demo地址：<a href="https://github.com/lijunW/WLJSearchTableView.git" target="_blank" rel="noopener">https://github.com/lijunW/WLJSearchTableView.git</a></p>
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/2018/01/11/iOS%20%E5%BF%AB%E9%80%9F%E6%B7%BB%E5%8A%A0%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8B%E6%8B%89%E6%98%BE%E7%A4%BA%E5%85%B3%E8%81%94%E6%90%9C%E7%B4%A2%E5%85%B3%E9%94%AE%E8%AF%8D/" class="leancloud-visitors view" data-flag-title="快速添加输入框下拉显示关联搜索关键词">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2018/04/09/Jenkins自动化部署iOS项目/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2017/07/20/iOS 多target添加依赖库/" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"xxx","appKey":"xxx","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-01-11 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Docs/">Docs<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/plugins/">plugins<span>8</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#GIF-animation"><span class="toc-article-text">GIF animation</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Video"><span class="toc-article-text">Video</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#GetStart"><span class="toc-article-text">GetStart</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#1-导入WLJSearchTableview文件夹进工程"><span class="toc-article-text">1.导入WLJSearchTableview文件夹进工程</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#2-导入-import-“UITextField-WLJSearchTableview-h”"><span class="toc-article-text">2.导入#import “UITextField+WLJSearchTableview.h”</span></a></li></ol></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2020 lijunWwang's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

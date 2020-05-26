@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>iOS 图片压缩优化 | lijunWang&#39;Blog</title>
+  <meta name="author" content="lijunWwang">
+  
+  <meta name="description" content="Introduce tag plugins in freemind.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="iOS 图片压缩优化"/>
+  <meta property="og:site_name" content="lijunWang&#39;Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">lijunWang&#39;Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> iOS 图片压缩优化</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> Introduce tag plugins in freemind.
+		 </div> <!-- alert -->
+	  		
+
+	  <p>最近做图片上传时，遇到图片压缩的问题，由于应用情景大多是在非WIFI网络下，所有图片的压缩必留就要控制好，压缩的过小会失真，压缩不够费流量而且上传性能低（上传接口用的是图片转data在转二进制字符串的形式，这种形式上传图片性能很低，但是接口在这还是得用），从代码本身出发，还是有优化空间的</p>
+<p>从网上找了一些图片压缩优化方案，综合了一下</p>
+<p> 图片压缩的逻辑:（可根据实际需求调整）<br> 一:图片尺寸压缩 主要分为以下几种情况 一般参照像素为1080<br>  a.图片宽高均≤1080px时，图片尺寸保持不变;<br>  b.宽或高均＞1080px时 ——图片宽高比≤2，则将图片宽或者高取大的等比压缩至1080px; ——但是图片宽高比＞2时，则宽或者高取小的等比压缩至1080px;<br>  c.宽高一个＞1080px，另一个＜1080px，–图片宽高比＞2时，则宽高尺寸不变;–但是图片宽高比≤2时,则将图片宽或者高取大的等比压缩至1080px.<br> 二:图片质量压缩<br>  尺寸压缩后再进行质量压缩<br>  根据尺寸压缩后的data大小决定不同的压缩比例，（可根据实际需求调整）</p>
+<p>直接上代码</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 我们的图片压缩参照为1080px</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> KitTargetPx 1080</span></span><br><span class="line">+ (<span class="built_in">NSData</span> *)imageCompressForSize:(<span class="built_in">UIImage</span> *)sourceImage&#123;</span><br><span class="line">   <span class="keyword">return</span>  [<span class="built_in">UIImage</span> imageCompressForSize:sourceImage targetPx:KitTargetPx];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> mark -- 图片压缩方法</span></span><br><span class="line">+ (<span class="built_in">NSData</span> *)imageCompressForSize:(<span class="built_in">UIImage</span> *)sourceImage targetPx:(<span class="built_in">NSInteger</span>)targetPx &#123;</span><br><span class="line">    <span class="built_in">UIImage</span> *newImage = <span class="literal">nil</span>;             <span class="comment">// 尺寸压缩后的新图</span></span><br><span class="line">    <span class="built_in">CGSize</span> imageSize = sourceImage.size; <span class="comment">// 源图片的size</span></span><br><span class="line">    <span class="built_in">CGFloat</span> width = imageSize.width;     <span class="comment">// 源图片的宽</span></span><br><span class="line">    <span class="built_in">CGFloat</span> height = imageSize.height;   <span class="comment">// 原图片的高</span></span><br><span class="line">    <span class="built_in">BOOL</span> drawImge = <span class="literal">NO</span>;     <span class="comment">// 是否需要重绘图片 默认是NO</span></span><br><span class="line">    <span class="built_in">CGFloat</span> scaleFactor = <span class="number">0.0</span>;           <span class="comment">// 压缩比例</span></span><br><span class="line">    <span class="built_in">CGFloat</span> scaledWidth = targetPx;      <span class="comment">// 压缩时的宽度 默认是参照像素</span></span><br><span class="line">    <span class="built_in">CGFloat</span> scaledHeight = targetPx;     <span class="comment">// 压缩是的高度 默认是参照像素</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先进行图片的尺寸的判断</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// a.图片宽高均≤参照像素时，图片尺寸保持不变</span></span><br><span class="line">    <span class="keyword">if</span> (width &lt; targetPx &amp;&amp; height &lt; targetPx) &#123;</span><br><span class="line">        newImage = sourceImage;</span><br><span class="line">    &#125;  <span class="keyword">else</span> <span class="keyword">if</span> (width &gt; targetPx &amp;&amp; height &gt; targetPx) &#123;</span><br><span class="line">        <span class="comment">// b.宽或高均＞1080px时</span></span><br><span class="line">        drawImge = <span class="literal">YES</span>;</span><br><span class="line">        <span class="built_in">CGFloat</span> factor = width / height;</span><br><span class="line">        <span class="keyword">if</span> (factor &lt;= <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="comment">// b.1图片宽高比≤2，则将图片宽或者高取大的等比压缩至1080px</span></span><br><span class="line">            scaleFactor = width &gt; height ? targetPx / width : targetPx / height;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// b.2图片宽高比＞2时，则宽或者高取小的等比压缩至1080px</span></span><br><span class="line">            scaleFactor = width &gt; height ? targetPx / height : targetPx / width;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (width &gt; targetPx &amp;&amp;  height &lt; targetPx ) &#123;</span><br><span class="line">        <span class="comment">// c.宽高一个＞1080px，另一个＜1080px 宽大于1080</span></span><br><span class="line">        <span class="keyword">if</span> (width / height &gt; <span class="number">2</span>) &#123;</span><br><span class="line">            newImage = sourceImage;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            drawImge = <span class="literal">YES</span>;</span><br><span class="line">            scaleFactor = targetPx / width;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (width &lt; targetPx &amp;&amp;  height &gt; targetPx) &#123;</span><br><span class="line">        <span class="comment">// c.宽高一个＞1080px，另一个＜1080px 高大于1080</span></span><br><span class="line">        <span class="keyword">if</span> (height / width &gt; <span class="number">2</span>) &#123;</span><br><span class="line">            newImage = sourceImage;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            drawImge = <span class="literal">YES</span>;</span><br><span class="line">            scaleFactor = targetPx / height;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果图片需要重绘 就按照新的宽高压缩重绘图片</span></span><br><span class="line">    <span class="keyword">if</span> (drawImge == <span class="literal">YES</span>) &#123;</span><br><span class="line">        scaledWidth = width * scaleFactor;</span><br><span class="line">        scaledHeight = height * scaleFactor;</span><br><span class="line">        <span class="built_in">UIGraphicsBeginImageContext</span>(<span class="built_in">CGSizeMake</span>(scaledWidth, scaledHeight));</span><br><span class="line">        <span class="comment">// 绘制改变大小的图片</span></span><br><span class="line">        [sourceImage drawInRect:<span class="built_in">CGRectMake</span>(<span class="number">0</span>, <span class="number">0</span>, scaledWidth,scaledHeight)];</span><br><span class="line">        <span class="comment">// 从当前context中创建一个改变大小后的图片</span></span><br><span class="line">        newImage =<span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">        <span class="comment">// 使当前的context出堆栈</span></span><br><span class="line">        <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 防止出错  可以删掉的</span></span><br><span class="line">    <span class="keyword">if</span> (newImage == <span class="literal">nil</span>) &#123;</span><br><span class="line">        newImage = sourceImage;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 根据图片大小 在进行质量上压缩</span></span><br><span class="line">    <span class="built_in">NSData</span> * scaledImageData = <span class="literal">nil</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">UIImageJPEGRepresentation</span>(newImage, <span class="number">1</span>) == <span class="literal">nil</span>) &#123;</span><br><span class="line">        scaledImageData = <span class="built_in">UIImagePNGRepresentation</span>(newImage);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        scaledImageData = <span class="built_in">UIImageJPEGRepresentation</span>(newImage, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (scaledImageData.length&gt;<span class="number">100</span>*<span class="number">1024</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (scaledImageData.length&gt;<span class="number">1024</span>*<span class="number">1024</span>) &#123;</span><br><span class="line">                <span class="comment">//1M以及以上（压缩到0.3）（由于接口性能限制，测试在5s下超过0.3的转为二进制字符串方式上传会直接失败，长度超过限制，如果用post的formData形式则不存在此问题）</span></span><br><span class="line">                scaledImageData=<span class="built_in">UIImageJPEGRepresentation</span>(newImage, <span class="number">0.3</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (scaledImageData.length&gt;<span class="number">512</span>*<span class="number">1024</span>) &#123;</span><br><span class="line">                <span class="comment">//0.5M-1M</span></span><br><span class="line">                scaledImageData=<span class="built_in">UIImageJPEGRepresentation</span>(newImage, <span class="number">0.5</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (scaledImageData.length&gt;<span class="number">200</span>*<span class="number">1024</span>) &#123;</span><br><span class="line">                <span class="comment">//0.25M-0.5M</span></span><br><span class="line">                scaledImageData=<span class="built_in">UIImageJPEGRepresentation</span>(newImage, <span class="number">0.8</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> scaledImageData;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/2017/05/29/iOS%20%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E4%BC%98%E5%8C%96/" class="leancloud-visitors view" data-flag-title="iOS 图片压缩优化">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2017/07/20/iOS 多target添加依赖库/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2016/12/21/iOS UIWebView 图片点击/" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"xxx","appKey":"xxx","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2017-05-29 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Docs/">Docs<span>9</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/plugins/">plugins<span>8</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2020 lijunWwang's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

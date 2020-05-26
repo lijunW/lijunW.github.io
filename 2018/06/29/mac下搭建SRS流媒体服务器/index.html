@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>mac下搭建SRS流媒体服务器 | lijunWang&#39;Blog</title>
+  <meta name="author" content="lijunWwang">
+  
+  <meta name="description" content="lijunWang&#39;Blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="mac下搭建SRS流媒体服务器"/>
+  <meta property="og:site_name" content="lijunWang&#39;Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70812759-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70812759-1');
+</script>
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">lijunWang&#39;Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class=""></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class=""></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>About
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/atom.xml" title="Subscribe me.">
+			  <i class=""></i>RSS
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> mac下搭建SRS流媒体服务器</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>关于SRS的详细介绍，请看<a href="https://github.com/ossrs/srs" target="_blank" rel="noopener""><code>SRS官方地址</code></a></p>
+<p>选择SRSv2.0版本   </p>
+<p>  <code>1. clone 代码到本地</code><br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ossrs/srs.git</span><br></pre></td></tr></table></figure></p>
+<p>  <code>2.设置 配置文件configure.sh</code><br>    按照官网的说法，在mac平台下编译需要指定平台为<code>osx</code>，即</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">./configure --osx</span><br><span class="line">```  </span><br><span class="line">同时还可以附带禁用一些依赖库已提高编译成功率，比如</span><br><span class="line">```bash</span><br><span class="line"><span class="comment"># 指定Mac编译，并关闭其他option</span></span><br><span class="line">./configure --osx --without-ssl --without-hls --without-hds --without-dvr --without-nginx --without-http-callback --without-http-server --without-stream-caster --without-http-api --without-ffmpeg --without-transcode --without-ingest --without-stat --without-librtmp</span><br><span class="line">```   </span><br><span class="line">但实际运行中会报错</span><br><span class="line">&lt;img src=<span class="string">"http://ovn0zb2g7.bkt.clouddn.com/1__wanglijun_wanglijuns-MacBook-Pro____Documents_GitHub_srs_trunk.png"</span>&gt;  </span><br><span class="line"></span><br><span class="line">&lt;img src=<span class="string">"http://ovn0zb2g7.bkt.clouddn.com/1__wanglijun_wanglijuns-MacBook-Pro____Documents_GitHub_srs_trunk-2.png"</span>&gt;</span><br><span class="line"></span><br><span class="line">根据错误提示，发现是`DARWIN`模块的`i386`模拟器平台出错，由于不需要编译模拟器平台，只需想办法去掉`i386`平台的编译选项</span><br><span class="line"></span><br><span class="line">从工程的`trunk`文件夹下的`objs`文件夹下可以发现`st-1.9`文件夹下就是`DARWIN_18.0`的代码，从终端错误提示的最后一行也发现是编译`st-1.9`出错，从`congigure.sh`中发现所有模块的配置均在各自的`Makefile`文件中,找到`st-1.9`下`DARWIN_18.0`的`Makefile`文件，搜索`i386`，果然找到  </span><br><span class="line">```bash</span><br><span class="line">CFLAGS      += -arch i386 -arch x86_64</span><br><span class="line">LDFLAGS     += -arch i386 -arch x86_64</span><br></pre></td></tr></table></figure>
+<p>删除这两个参数的 <code>-arch i386</code>,只保留mac平台的<code>-arch x86_64</code>,重新执行<code>./configure --osx</code><br>然而以上错误还在，发现<code>Makefile</code>中这两个参数又被还原了，不管怎么修改，只要重新执行配置<code>configure</code>都会被还原<br>在<code>auto</code>文件夹下的<code>depends.sh</code>中看到这样一段代码<br><img src="http://ovn0zb2g7.bkt.clouddn.com/depends_sh_%E2%80%94___Documents_GitHub_srs_trunk.png"><br>发现每次都是删除已有的文件夹，再从zip文件解压过来，所以每次修改都被还原<br>在<code>3rdparty</code>文件夹下找到<code>st-1.9.zip</code>，打开找到<code>Makefile</code>文件，修改其中那两个参数再保存回zip，重新执行<code>./configure --osx</code><br><code>配置成功！</code><br><img src="http://ovn0zb2g7.bkt.clouddn.com/Banners_and_Alerts_%E5%92%8C_1__make__clang__%E5%92%8C_depends_sh_%E2%80%94___Documents_GitHub_srs_trunk.png"><br>  <code>3.编译 make</code></p>
+<p>  <code>编译成功后，更具网上说发先修改srs.sh 和 rtmp.sh 中的最大并发数 1000-&gt;250</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">开始: ./etc/init.d/srs start</span><br><span class="line">停止: ./etc/init.d/srs stop</span><br><span class="line">重启: ./etc/init.d/srs restart</span><br></pre></td></tr></table></figure>
+<p>启动成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/Documents/GitHub/srs/trunk(master*) » ./etc/init.d/srs start     wanglijun@wanglijuns-MacBook-Pro</span><br><span class="line">Starting SRS...                                            [  OK  ]</span><br><span class="line">SRS started(pid 33457)                                     [  OK  ]</span><br></pre></td></tr></table></figure>
+
+<p><code>使用FFMPeg推流测试：（请提前安装ffmpeg,并准备一个本地视频文件）</code><br>cd 到视频文件所在目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i python快速打造微信聊天机器人.mp4  -vcodec libx264  -f flv   rtmp://192.168.2.187:1935/live/room_wlj</span><br></pre></td></tr></table></figure>
+<p>说明：<br><code>-vcodec libx264</code> 使用libx264编解码器转码<br><code>rtmp://192.168.2.187:1935/live/room_wlj</code> ip地址为本机ip地址，1935是SRS配置中指定监听的端口，后面地址名称随便写</p>
+<p><code>在VLC播放器下播放视频流测试</code><br>打开VLC，选择网络，输入<code>rtmp://192.168.2.187:1935/live/room_wlj</code>，选择播放，一般刚开始会等待十秒左右的解码缓冲，开始播放：<br><img src="http://ovn0zb2g7.bkt.clouddn.com/Window_%E5%92%8C_rtmp___192_168_2_187_1935_live_room_wlj_%E5%92%8C_1__ffmpeg_-re_-i_python%E5%BF%AB%E9%80%9F%E6%89%93%E9%80%A0%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA_mp4_-vcodec__-f__ffmpeg_.png"></p>
+
+	  <div class="article-footer-copyright">
+
+    本博客采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议(CC BY-NC-SA 4.0) 发布.</a>
+</div>
+
+	</div>
+
+	
+	<span id="/2018/06/29/mac%E4%B8%8B%E6%90%AD%E5%BB%BASRS%E6%B5%81%E5%AA%92%E4%BD%93%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="leancloud-visitors view" data-flag-title="mac下搭建SRS流媒体服务器">
+		<em class="post-meta-item-text"> Page View </em> <i class="leancloud-visitors-count"></i>
+	</span>
+	
+	<div>
+  	<center>
+
+	<div class="pagination">
+
+    
+    
+    <a href="/2018/07/09/iOS绘制高德地图自定义气泡/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> 上一页</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2018/04/09/Jenkins自动化部署iOS项目/" type="button" class="btn btn-default ">下一页<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	<!--
+<section id="comment">
+    <h2 class="title">留言</h2>
+
+    
+</section>
+
+-->
+	
+		<section id="comments" class="comments">
+			<style>
+			.comments{margin:30px;padding:10px;background:rgb(0, 0, 0)}
+			@media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#000}}
+			</style>
+			<div id="vcomment" class="comment"></div>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src="https://cdnjs.loli.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+var valineConfig = {"enable":true,"appId":"xxx","appKey":"xxx","placeholder":"提交评论时留下邮箱收到回复后将自动通知","visitor":true,"avatar":"monsterid","requiredFields":["nick","mail"]}
+valineConfig.el='#vcomment';
+new Valine(valineConfig);
+    // new Valine({
+    //     el: '#vcomment',
+    //     appId: "",
+    //     appKey: "",
+    //     placeholder: "提交评论时留下邮箱收到回复后将自动通知",
+    //     avatar:"monsterid",
+    //     visitor: "true",
+    //     requiredFields: "nick,mail".split(','),
+    // });
+</script>
+
+		</section>
+	
+	</div> <!-- col-md-9/col-md-12 -->
+
+
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-06-29 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+		
+
+	</div>
+	
+		
+
+</div><!-- row -->
+
+<!--
+ -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  
+  &copy; 2020 lijunWwang's Blog
+  
+      powered by <a href="http://hexo.io/" target="_blank">Hexo</a>.Theme <a href="https://github.com/Ares-X/hexo-theme-freemind.bithack" target="_blank">freemind.bithack</a>  
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
