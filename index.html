@@ -151,7 +151,7 @@
   <div class="row">
 	
            
-  	      <div class="thumbnail"><a href="/2020/04/15/iOS原生域名解析/"><img src="2020/04/15/iOS原生域名解析/https://tva1.sinaimg.cn/large/007S8ZIlgy1gf6094lgjbj30u01hcn5g.jpg" alt="iOS原生域名解析"  class="nofancybox"></a>
+  	      <div class="thumbnail"><a href="/2020/04/15/iOS原生域名解析/"><img src="2020/04/15/iOS原生域名解析/images/20200323170956681.jpg" alt="iOS原生域名解析"  class="nofancybox"></a>
            
 		</div>
 	
@@ -174,7 +174,7 @@
   <div class="row">
 	
            
-  	      <div class="thumbnail"><a href="/2020/04/15/iOS原生域名解析/"><img src="2020/04/15/iOS原生域名解析/https://tva1.sinaimg.cn/large/007S8ZIlgy1gf6094lgjbj30u01hcn5g.jpg" alt="iOS原生域名解析"  class="nofancybox"></a>
+  	      <div class="thumbnail"><a href="/2020/04/15/iOS原生域名解析/"><img src="2020/04/15/iOS原生域名解析/images/20200323170956681.jpg" alt="iOS原生域名解析"  class="nofancybox"></a>
            
 		</div>
 	
@@ -218,13 +218,13 @@
 		</div>
 	
 	
-		<p>  &#8195;&#8195;最近折腾了下<code>Jenkins</code>的自动化部署，写了点总结经验。<br><br>  &#8195;&#8195;[<code>Jenkins</code>](<a href="https://jenkins.io&quot;" target="_blank" rel="noopener">https://jenkins.io&quot;</a> Jenkins”) 是一个开源软件项目，是基于<code>Java</code>开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。<br><br><code>Jenkins</code>功能包括：<br><br><code>1、</code>持续的软件版本发布/测试项目。<br><br><code>2、</code>监控外部调用执行的工作。<br></p>
+		<p>  最近折腾了下<code>Jenkins</code>的自动化部署，写了点总结经验。<br><br>  <a href="https://jenkins.io" target="_blank" rel="noopener">Jenkins</a> 是一个开源软件项目，是基于<code>Java</code>开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。<br><br><code>Jenkins</code>功能包括：<br><br><code>1、</code>持续的软件版本发布/测试项目。<br><br><code>2、</code>监控外部调用执行的工作。<br></p>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作<br></h2><p>本文中，我们将用<code>Jenkins</code>安装在一台闲置的mac上（mac需要安装Xcode）,通过<code>远程登录</code>进行项目配置。通过远程点击一个URL<code>http://192.168.2.182:8080/job/SifangManager/buildWithParameters?token=remotebuild&amp;BUILD_SHORTVERSION_NUNBER=2.0.1&amp;BUILD_VERSION_NUNBER=2.0.1.3</code>即可对<code>iOS</code>项目进行自动化打包<code>ipa</code>并发布到<code>itunsConnect</code>,完成后会有邮件通知。</p>
 <blockquote>
 <p>关于mac远程登录：<br><br>  在<font color="red">要登录的远程电脑</font>上打开<code>系统偏好设置</code>-&gt;<code>共享</code>，勾选<code>远程登录</code>,可以看到提示如图，</p>
 </blockquote>
 <!-- ![mac远程登录设置](2018-04-09/Window.png) -->
-<img src="http://ovn0zb2g7.bkt.clouddn.com/wljBlog_2018-04-09_0_0.png">
+<img src="http://git.253.com/wljBlog_2018-04-09_0_0.png">
 <br><br>
 确认自己的电脑和远程电脑在同一局域网下，在<font color="red">自己的电脑</font>上终端输入
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh 要登录的远程电脑用户名<span class="meta">@要登录的远程电脑IP</span></span><br></pre></td></tr></table></figure>
@@ -246,13 +246,13 @@
 		</div>
 	
 	
-		<p>  &#8195;&#8195;最近折腾了下<code>Jenkins</code>的自动化部署，写了点总结经验。<br><br>  &#8195;&#8195;[<code>Jenkins</code>](<a href="https://jenkins.io&quot;" target="_blank" rel="noopener">https://jenkins.io&quot;</a> Jenkins”) 是一个开源软件项目，是基于<code>Java</code>开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。<br><br><code>Jenkins</code>功能包括：<br><br><code>1、</code>持续的软件版本发布/测试项目。<br><br><code>2、</code>监控外部调用执行的工作。<br></p>
+		<p>  最近折腾了下<code>Jenkins</code>的自动化部署，写了点总结经验。<br><br>  <a href="https://jenkins.io" target="_blank" rel="noopener">Jenkins</a> 是一个开源软件项目，是基于<code>Java</code>开发的一种持续集成工具，用于监控持续重复的工作，旨在提供一个开放易用的软件平台，使软件的持续集成变成可能。<br><br><code>Jenkins</code>功能包括：<br><br><code>1、</code>持续的软件版本发布/测试项目。<br><br><code>2、</code>监控外部调用执行的工作。<br></p>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作<br></h2><p>本文中，我们将用<code>Jenkins</code>安装在一台闲置的mac上（mac需要安装Xcode）,通过<code>远程登录</code>进行项目配置。通过远程点击一个URL<code>http://192.168.2.182:8080/job/SifangManager/buildWithParameters?token=remotebuild&amp;BUILD_SHORTVERSION_NUNBER=2.0.1&amp;BUILD_VERSION_NUNBER=2.0.1.3</code>即可对<code>iOS</code>项目进行自动化打包<code>ipa</code>并发布到<code>itunsConnect</code>,完成后会有邮件通知。</p>
 <blockquote>
 <p>关于mac远程登录：<br><br>  在<font color="red">要登录的远程电脑</font>上打开<code>系统偏好设置</code>-&gt;<code>共享</code>，勾选<code>远程登录</code>,可以看到提示如图，</p>
 </blockquote>
 <!-- ![mac远程登录设置](2018-04-09/Window.png) -->
-<img src="http://ovn0zb2g7.bkt.clouddn.com/wljBlog_2018-04-09_0_0.png">
+<img src="http://git.253.com/wljBlog_2018-04-09_0_0.png">
 <br><br>
 确认自己的电脑和远程电脑在同一局域网下，在<font color="red">自己的电脑</font>上终端输入
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh 要登录的远程电脑用户名<span class="meta">@要登录的远程电脑IP</span></span><br></pre></td></tr></table></figure>
